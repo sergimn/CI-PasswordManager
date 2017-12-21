@@ -52,7 +52,7 @@ void init_timers(){
 void init_interrupts(){
 //INT0 -> BOTÓ ACCEPT, INT1 -> BOTÓ 1, INT2 -> BOTÓ 2	
     RCONbits.IPEN = 1; // Enable priority
-    INTCONbits.GIE = 1; // Enable high priority interrupts
+    INTCONbits.GIEH = 1; // Enable high priority interrupts
     INTCONbits.PEIE = 1; // Enable low priority peripheral interrupts
 
     //BOTÓ ACCEPT (int0)
