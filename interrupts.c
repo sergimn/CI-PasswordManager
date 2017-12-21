@@ -20,7 +20,7 @@ void enable_interrup(){
     INTCONbits.INT0IE = 1;
     INTCON3bits.INT1IE = 1;
     INTCON3bits.INT2IE = 1;
-    INTCONbits.GIEH = 1
+    INTCONbits.GIEH = 1;
 }
 
 void disab_interup(){
