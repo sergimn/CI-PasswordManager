@@ -9,10 +9,27 @@
 
 int count = 0;
 
-
+void enable_interrup();
 
 //Desactiva interrupcions relacionades amb inactivitat.
 void disab_interup();
+
+
+
+void enable_interrup(){
+    INTCONbits.INT0IE = 1;
+    INTCON3bits.INT1IE = 1;
+    INTCON3bits.INT2IE = 1;
+    INTCONbits.GIEH = 1
+}
+
+void disab_interup(){
+    INTCONbits.INT0IE = 0;
+    INTCON3bits.INT1IE = 0;
+    INTCON3bits.INT2IE = 0;
+    INTCONbits.GIEH = 0;
+
+}
 
 
 void interrupt low_priority i_baixes(void){ // interrupcions baixes
