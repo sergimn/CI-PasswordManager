@@ -6,7 +6,7 @@
 
 #define amunt RB0
 #define avall RB1
-#define
+#define acceptar RB2
 
 
 #define NDigitsPIN 4
@@ -17,8 +17,6 @@ char PIN[NDigitsPIN+1] = {1, 2, 3, 4, 0x00};
 void manage_lock();
 
 
-//Bloqueja el sistema en espera del pin correcte
-void lock();
 
 void manage_lock(){
     disab_interup();
@@ -27,6 +25,11 @@ void manage_lock(){
 }
 
 
+void lock(){
 
+    int i = 0;
+
+
+}
 
 
