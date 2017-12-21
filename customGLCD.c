@@ -1,7 +1,7 @@
 #include"main.c" //S'ha de comentar per a compilacio
 #include"lock.c" //S'ha de comentar per a compilacio
 #include"aux.c"
-#include"GLCD.c"
+#include"rutines_GLCD.c"
 #include"menu.c" //S'ha de comentar per a compilacio
 
 //Imprimeix per pantalla les etiquetes anterior, actual i posterior a la seleccionada.
