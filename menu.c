@@ -20,7 +20,7 @@
 
 void main_menu(){
 
-    char etiquetes[Ncontes][16]{"Facebook", "Google", "Hotmail", "Github"} ;  //Com ens referirem a la conta per pantalla
+    char etiquetes[Ncontes][16] = {"Facebook", "Google", "Hotmail", "Github"} ;  //Com ens referirem a la conta per pantalla
     char usuari[Ncontes][32];     //Nom d'usuari
     char psswds[Ncontes][32];     //Contrassenya
 
