@@ -1,0 +1,27 @@
+#ifndef MENU_HH
+#define MENU_HH
+
+
+
+
+#include"aux.h"
+#include"customGLCD.h"
+#include"GLCD.h"
+//Falta el USB.h
+
+
+#define Ncontes 4 //Nombre de contes que contindra el dispositiu
+#define RB0 PORTBbits.RB0
+#define RB1 PORTBbits.RB1
+#define RB2 PORTBbits.RB2
+
+#define PGAnt 2         //Pagina del GLCD en el que l'etiqueta previa s'imprimira
+#define PGAct PGAnt+1   //Pagina del GLCD en el que l'etiqueta actual s'imprimira
+#define PGPos PGAct+1   //Pagina del GLCD en el que l'etiqueta posterior s'imprimira
+
+
+//Mostra el menu i permet navegar entre les etiquetes
+void main_menu();
+
+
+#endif

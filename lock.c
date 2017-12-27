@@ -1,26 +1,11 @@
-#include"main.c" //S'ha de comentar per a compilacio
-#include"aux.c"
-#include"rutines_GLCD.c"
-#include"customGLCD.c"
-#include"interrupts.c"
-
-#define amunt RB0
-#define avall RB1
-#define acceptar RB2
-
-
-#define NDigitsPIN 4
-char PIN[NDigitsPIN+1] = {'1', '2', '3', '4', 0x00};
-
-
-//Gestiona el lock i les interrupcions relacionades amb el lock
-void manage_lock();
-
+#include"lock.h"
 
 
 void manage_lock(){
+    clearGLCD(0, 7, 0, 127); //Bora la pantalla
     disab_interup();
     lock();
+    T0CONbits.TMR0ON = 1; //Activa el compte enrere
     enable_interrup();
 }
 
@@ -31,12 +16,12 @@ void lock(){
     char usrPIN[NDigitsPIN+1] = {'0', '0', '0', '0', 0x00};
     int correct_psswd = 0;
     while(correct_psswd == 0){
-        mostrar_lock(usrPIN[], i);
+        mostrar_lock(usrPIN, i);
         if(amunt){ //Augmentar numero
             __delay_ms(10);
             if(amunt){
                 while(amunt);
-                no_char_overflo(usrPIN[i]+1);
+                usrPIN[i] = no_char_overflo(usrPIN[i]+1);
 
             }
         }
@@ -44,7 +29,7 @@ void lock(){
             __delay_ms(10);
             if(avall){
                 while(avall);
-                no_char_overflo(usrPIN[i]-1);
+                usrPIN[i] = no_char_overflo(usrPIN[i]-1);
             }
         }
         if(acceptar){
@@ -55,9 +40,17 @@ void lock(){
             }
         }
         if(i == NDigitsPIN){
-            if(PIN != usrPIN){
-                i = 0;
-                clearGLCD(0, 7, 0, 127);
+            if(strcmp(usrPIN, PIN) != 0){
+                i = 0; //Es torna a començar des del primer digit
+                clearGLCD(0, 7, 0, 127); //Es borra la pantalla
+
+                int k; //Es restableix el pin a 0000
+                for(k = 0; k < NDigitsPIN; ++k){
+                    usrPIN[k] = '0';
+                }
+                usrPIN[NDigitsPIN] = 0x00;
+
+
             }
             else{
                 correct_psswd = 1;
@@ -65,8 +58,5 @@ void lock(){
             }
         }
     }
+    clearGLCD(0, 7, 0, 127);
 }
-
-
-
-

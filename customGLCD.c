@@ -1,15 +1,4 @@
-#include"main.c" //S'ha de comentar per a compilacio
-#include"lock.c" //S'ha de comentar per a compilacio
-#include"aux.c"
-#include"rutines_GLCD.c"
-#include"menu.c" //S'ha de comentar per a compilacio
-
-//Imprimeix per pantalla les etiquetes anterior, actual i posterior a la seleccionada.
-void mostrar_menu(char ant[], char act[], char pos[]);
-
-//Imprimeix la i posicio del PIN introduit per l'usuari.
-void mostrar_lock(char customPIN[], int i);
-
+#include"customGLCD.h"
 
 
 void mostrar_menu(char ant[], char act[], char pos[]){
