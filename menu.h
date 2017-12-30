@@ -4,9 +4,11 @@
 
 
 
-#include"aux.h"
+#include"auxiliars.h"
 #include"customGLCD.h"
 #include"GLCD.h"
+#include"interrupts.h"
+
 //Falta el USB.h
 
 

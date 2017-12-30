@@ -1,4 +1,4 @@
-#include"aux.h"
+#include"auxiliars.h"
 
 int abs(int a){
     if(a < 0) return -a;

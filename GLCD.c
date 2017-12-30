@@ -1,7 +1,4 @@
-#include<p18f4550.h>
 #include "GLCD.h"
-#include "ascii.h"
-#include "string.h"
 
 // D'us intern
 void GLCDBusyWait(byte CS);
@@ -63,7 +60,7 @@ void GLCDBusyWait(byte CS)
 {
 byte valor;
 	TRISD=0xFF;
-	TRISB=0;
+	TRISB=0x07;
 	TRISA = 0xE3;
 	//Seleccionem controlador
 	if(CS==_CS1)CS1=0;
@@ -96,7 +93,7 @@ void sendGLCDCommand(byte val, byte CS)
 	GLCDBusyWait(CS);
 
 	
-	TRISB=0;
+	TRISB=0x07;
 	TRISA = 0xE3;
 	//Seleccionem controlador
 	if(CS==_CS1)CS1=0;
@@ -170,7 +167,7 @@ void writeByte(byte page, byte y, byte data) {
 
 	GLCDBusyWait(chip);
 
-	TRISB=0;
+	TRISB=0x07;
 	TRISA = 0xE3;
 
 	//Seleccionem controlador
@@ -205,7 +202,7 @@ byte readByteReal(byte page, byte y, byte first) {
 
 	TRISD = 0xFF;
 
-	TRISB=0;
+	TRISB=0x07;
 	TRISA = 0xE3;
 	//Seleccionem controlador
 	if(chip==_CS1)CS1=0;

@@ -3,6 +3,7 @@
 
 #include"GLCD.h"
 #include"menu.h"
+#include<string.h>
 
 //Imprimeix per pantalla les etiquetes anterior, actual i posterior a la seleccionada.
 void mostrar_menu(char ant[], char act[], char pos[]);

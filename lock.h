@@ -1,7 +1,7 @@
 #ifndef LOCK_HH
 #define LOCK_HH
 
-#include"aux.h"
+#include"auxiliars.h"
 #include"menu.h"
 #include"interrupts.h"
 #include"customGLCD.h"

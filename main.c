@@ -1,11 +1,11 @@
 #include <p18f4550.h>
 #include <string.h>
 
-#include"GLCD.h"
 #include"lock.h"
 #include"menu.h"
+#include"GLCD.h"
 
-#define _XTAL_FREQ 8000000
+//#define _XTAL_FREQ 8000000
 
 //Inicialitza els registres referents a l'entrada/sortida de USB
 void init_IO(){
@@ -63,14 +63,11 @@ void init_GLCD(){
 
 //Inicialitza els registres de la PIC
 void init_PIC(){
-
     init_IO();
     init_timers();
     init_interrupts();
     init_GLCD();
-
 }
-
 
 int main(){
     init_PIC();

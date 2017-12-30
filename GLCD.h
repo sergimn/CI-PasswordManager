@@ -1,3 +1,10 @@
+#ifndef GLCD_HH
+#define GLCD_HH
+
+#include "ascii.h"
+#include <string.h>
+#include <p18f4550.h>
+
 
 /* La pantalla té dos xips de memòria. Un controla la meitat esquerra i
 l'altre la meitat dreta. Cada meitat es divideix en 8 files i 64 columnes.
@@ -51,3 +58,5 @@ Cada columna de text té una amplada de 6 píxels.
 Compte els caracters estan definits amb un font 7x5 (7 alt, 5 amplada*/
 //NO IMPLEMENTADA
 void putCar(byte x, byte y, char c);
+
+#endif

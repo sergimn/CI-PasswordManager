@@ -1,5 +1,9 @@
-#ifndef AUX_HH
-#define AUX_HH
+#ifndef AUXILIARS_HH
+#define AUXILIARS_HH
+
+#include<p18f4550.h>
+
+#define _XTAL_FREQ 8000000
 
 
 //Retorna el valor absolut de a

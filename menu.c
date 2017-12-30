@@ -2,8 +2,6 @@
 
 
 
-
-
 void main_menu(){
 
     char etiquetes[Ncontes][16] = {"Facebook", "Google", "Hotmail", "Github"} ;  //Com ens referirem a la conta per pantalla
@@ -37,12 +35,6 @@ void main_menu(){
         }
         mostrar_menu(etiquetes[no_overflo(i-1, Ncontes-1)], etiquetes[i], etiquetes[no_overflo(i+1, Ncontes-1)]);
 
-
-
-
-
-
-        //Mostrar menu, permetre seleccionar...
     }
 
 }
