@@ -20,3 +20,13 @@ void mostrar_lock(char customPIN[], int i){
     //Pagina 2, comença a partir del byte 6
     putch(2, 6+i*2, customPIN[i]);
 }
+
+void enable_GLCD(){
+    disab_interup();
+    TRISB = 0x00; //Tots els pins del port B de sortida
+}
+
+void disable_GLCD(){
+    TRISB = 0x07; //RB0, RB1, RB2 es poden fer servir per a entrada
+    enable_interrup();
+}

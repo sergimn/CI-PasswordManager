@@ -4,6 +4,7 @@
 #include "ascii.h"
 #include <string.h>
 #include <p18f4550.h>
+#include "customGLCD.h"
 
 
 /* La pantalla té dos xips de memòria. Un controla la meitat esquerra i

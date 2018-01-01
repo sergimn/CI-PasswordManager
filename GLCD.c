@@ -5,9 +5,9 @@ void GLCDBusyWait(byte CS);
 byte readByteReal(byte, byte, byte);
 
 
-#define CS1 PORTAbits.RA2
-#define CS2 PORTAbits.RA3
-#define RS PORTAbits.RA4
+#define CS1 PORTAbits.RB0
+#define CS2 PORTAbits.RB1
+#define RS PORTAbits.RB2
 #define RW PORTBbits.RB3
 #define E PORTBbits.RB4
 #define RST PORTBbits.RB5
@@ -41,8 +41,10 @@ byte readByteReal(byte, byte, byte);
 #define _RW 0x08
 #define _RS 0x04
 
+
 void putch(byte page, byte y, char c) 	
 {
+        enable_GLCD();
 	int fontPos = (c-' ')*5;
 	int i;
 	y = y*5;
@@ -53,15 +55,15 @@ void putch(byte page, byte y, char c)
 		writeByte (page, y, aux);
 		++y;
 		++fontPos;
-	}
+        }
+        disable_GLCD();
 }
 
 void GLCDBusyWait(byte CS)
 {
 byte valor;
 	TRISD=0xFF;
-	TRISB=0x07;
-	TRISA = 0xE3;
+        enable_GLCD(); //Activa la GLCD
 	//Seleccionem controlador
 	if(CS==_CS1)CS1=0;
 	if(CS==_CS2)CS2=0;
@@ -83,6 +85,7 @@ byte valor;
 
 	CS1=1;
 	CS2=1;
+        disable_GLCD(); //Desactiva la GLCD
 }
 
 
@@ -90,11 +93,11 @@ byte valor;
 //
 void sendGLCDCommand(byte val, byte CS) 
 {
+        enable_GLCD();
 	GLCDBusyWait(CS);
 
 	
-	TRISB=0x07;
-	TRISA = 0xE3;
+
 	//Seleccionem controlador
 	if(CS==_CS1)CS1=0;
 	if(CS==_CS2)CS2=0;
@@ -110,21 +113,22 @@ void sendGLCDCommand(byte val, byte CS)
 	E=0;
 
 	CS1=1;
-	CS2=1;
+        CS2=1;
+        disable_GLCD();
 }
 
 // Selecciona linea de inici (z= 0 a 63)
 // 
 void setStartLine(byte z) {
 	sendGLCDCommand(SET_START_LINE|z, _CS1);
-	sendGLCDCommand(SET_START_LINE|z, _CS2);
+        sendGLCDCommand(SET_START_LINE|z, _CS2);
 }
 
 // Set Page Address  X -row- (x= 0 a 7)
 //
 void setXAddress(byte page) {
 	sendGLCDCommand(SET_X_ADDRESS|page, _CS1);
-	sendGLCDCommand(SET_X_ADDRESS|page, _CS2);
+        sendGLCDCommand(SET_X_ADDRESS|page, _CS2);
 }
 
 // Set Y address Y -column- (y= 0 a 127)
@@ -137,7 +141,7 @@ void setYAddress(byte y) {
 	else {										// Part dreta
 		sendGLCDCommand(SET_Y_ADDRESS|63, _CS1);     
 		sendGLCDCommand(SET_Y_ADDRESS|(y-64), _CS2);
-	}
+        }
 }
 
 //Posiciona el cursor
@@ -145,16 +149,18 @@ void setYAddress(byte y) {
 void setAddress(byte page, byte y)
 {
 	setXAddress(page);
-	setYAddress(y);
+        setYAddress(y);
 }
 
 // Init GLCD
 //
 void GLCDinit() {
+        enable_GLCD();
 	RST=1;
 	sendGLCDCommand(SET_ON_OFF|1, _CS1);
 	sendGLCDCommand(SET_ON_OFF|1, _CS2);
-	setStartLine(0);
+        setStartLine(0);
+        disable_GLCD();
 }
 
 // Write data on GLCD at position (x,y)(Page x= 0 a 7) (y= 0 a 127)  
@@ -167,8 +173,7 @@ void writeByte(byte page, byte y, byte data) {
 
 	GLCDBusyWait(chip);
 
-	TRISB=0x07;
-	TRISA = 0xE3;
+        enable_GLCD();
 
 	//Seleccionem controlador
 	if(chip==_CS1)CS1=0;
@@ -185,11 +190,13 @@ void writeByte(byte page, byte y, byte data) {
 	E=0;
 
 	CS1=1;
-	CS2=1;
+        CS2=1;
+
+        disable_GLCD();
 
 }
 
-// faig un espai xd
+
 byte readByteReal(byte page, byte y, byte first) {
 	byte data;
 	byte chip = y > 63 ? _CS2 : _CS1;
@@ -202,8 +209,7 @@ byte readByteReal(byte page, byte y, byte first) {
 
 	TRISD = 0xFF;
 
-	TRISB=0x07;
-	TRISA = 0xE3;
+        enable_GLCD();
 	//Seleccionem controlador
 	if(chip==_CS1)CS1=0;
 	if(chip==_CS2)CS2=0;
@@ -218,6 +224,7 @@ byte readByteReal(byte page, byte y, byte first) {
 
 	CS1=1;
 	CS2=1;
+        disable_GLCD();
 
 	return (data);
 }
@@ -240,10 +247,12 @@ byte readByte(byte page, byte y) {
 void clearGLCD(byte ri, byte re, byte ci, byte ce) 
 {
 int i,j;
+    enable_GLCD();
 
 	for (i = ri; i <= re; i++) 
 		for (j=ci;j<=ce;j++)
 			writeByte(i,j,0);
+    disable_GLCD();
 }
 
 
@@ -286,13 +295,15 @@ void putCar(byte page, byte y, char c) {
 // Escriu un text o string (s apunta al primer caracter del string) començant a la posicio (x,y) del GLCD 
 //   (x= 0 a 7) (y= 0 a 20)
 void writeTxt(byte page, byte y, char * text) {
-   int i;
-   int tmp=strlen(text);
-   for (i=0;i<tmp;++i) {
+    enable_GLCD();
+    int i;
+    int tmp=strlen(text);
+    for (i=0;i<tmp;++i) {
       putCar(page,y,text[i]);
       y+=6;
       __delay_ms(60);
-   }
+    }
+    disable_GLCD();
 }
 
 
