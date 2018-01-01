@@ -10,7 +10,7 @@ void main_menu(){
 
     int i = 0;
     while(1){
-        writeNUM(0, 15, count); //Mostra el valor del compte enrere en pantalla
+        writeNum(0, 15, count); //Mostra el valor del compte enrere en pantalla
         if(RB0 == 1){ //RB0 fa baixar en el menu
             __delay_ms(10);
             if(RB0 == 1){
