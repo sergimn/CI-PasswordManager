@@ -13,9 +13,7 @@
 
 
 #define Ncontes 4 //Nombre de contes que contindra el dispositiu
-#define RB0 PORTBbits.RB0
-#define RB1 PORTBbits.RB1
-#define RB2 PORTBbits.RB2
+
 
 #define PGAnt 2         //Pagina del GLCD en el que l'etiqueta previa s'imprimira
 #define PGAct PGAnt+1   //Pagina del GLCD en el que l'etiqueta actual s'imprimira

@@ -8,9 +8,9 @@
 #include"GLCD.h"
 
 
-#define amunt RB0
-#define avall RB1
-#define acceptar RB2
+#define amunt PORTBbits.RB0
+#define avall PORTBbits.RB1
+#define acceptar PORTBbits.RB2
 #define NDigitsPIN 4
 
 

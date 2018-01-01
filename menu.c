@@ -11,25 +11,25 @@ void main_menu(){
     int i = 0;
     while(1){
         writeNum(0, 15, count); //Mostra el valor del compte enrere en pantalla
-        if(RB0 == 1){ //RB0 fa baixar en el menu
+        if(amunt == 1){ //RB0 fa baixar en el menu
             __delay_ms(10);
-            if(RB0 == 1){
-                while(RB0);
+            if(amunt == 1){
+                while(amunt);
                 i = no_overflo(i-1, Ncontes-1);
                 clearGLCD(PGAnt, PGPos, 0, 127); //Borrar la part de les etiquetes en el menu principal
             }
         }
-        if(RB1 == 1){ //RB1 fa pujar en el menu
+        if(avall == 1){ //RB1 fa pujar en el menu
             __delay_ms(10);
-            if(RB1 == 1){
+            if(avall == 1){
                 while(RB1);
                 i = no_overflo(i+1, Ncontes-1);
                 clearGLCD(PGAnt, PGPos, 0, 127); //Borrar la part de les etiquetes en el menu principal
             }
         }
-        if(RB2 == 1){ //RB2 accepta l'etiqueta actual
+        if(acceptar == 1){ //RB2 accepta l'etiqueta actual
             __delay_ms(10);
-            if(RB2 == 1){
+            if(acceptar == 1){
                 //KeyboardOUT(usuari[i], psswds[i]); //Treu els caracters pel teclat
             }
         }
