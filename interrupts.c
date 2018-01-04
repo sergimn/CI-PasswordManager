@@ -29,15 +29,24 @@ void interrupt low_priority i_baixes(void){ // interrupcions baixes
 
 void interrupt i_altes(void){ //interrupcions altes. Caldria fer control de rebots
         if (INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1) {
-                count = 0;
-                INTCONbits.INT0IF = 0;
-        }
+        	_delay_ms(10);
+        	if(INTCONbits.INT0IE == 1){
+		        count = 0;
+		        INTCONbits.INT0IF = 0;
+       		}
+       	}
         if (INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1) {
-                count = 0;
-                INTCON3bits.INT1IF = 0;
-        }
+        	_delay_ms(10);
+        	if(INTCON3bits.INT1IE == 1){
+		        count = 0;
+		        INTCON3bits.INT1IF = 0;
+        	}
+    	}
         if (INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1) {
-                count = 0;
-                INTCON3bits.INT2IF = 0;
-        }
+        	_delay_ms(10);
+        	if(INTCON3bits.INT2IE == 1){
+		        count = 0;
+		        INTCON3bits.INT2IF = 0;
+        	}
+    	}
 }
