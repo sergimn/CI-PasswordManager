@@ -22,7 +22,7 @@ void main_menu(){
         if(avall == 1){ //RB1 fa pujar en el menu
             __delay_ms(10);
             if(avall == 1){
-                while(RB1);
+                while(avall);
                 i = no_overflo(i+1, Ncontes-1);
                 clearGLCD(PGAnt, PGPos, 0, 127); //Borrar la part de les etiquetes en el menu principal
             }
